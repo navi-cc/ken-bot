@@ -1,0 +1,25 @@
+name: Main
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  default:
+    name: default pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v7
+
+      - name: install node
+        uses: actions/setup-node@v7
+
+      - name: install deps
+        run: npm ci
+
+      - name: run linter
+        run: npm run code:lint
+
+      - name: run formatter
+        run: npm run code:format
